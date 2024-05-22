@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.system_demo.mapper.AuthorMapper">
+
+    <select id="findAll" resultType="com.example.system_demo.entity.Author">
+        select * from OAG.author
+    </select>
+
+    <!-- 根据书名查询书籍 -->
+    <select id="findByName" resultType="com.example.system_demo.entity.Author">
+        SELECT * FROM OAG.author WHERE name = #{name}
+    </select>
+</mapper>
