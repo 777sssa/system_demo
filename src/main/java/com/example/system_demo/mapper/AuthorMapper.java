@@ -13,8 +13,8 @@ public interface AuthorMapper {
     @Select("select * from OAG.author")
     List<Author> findAll();
 
-//    @Select("SELECT * FROM OAG.author WHERE name LIKE CONCAT('%', #{name}, '%')")
-    @Select("SELECT * FROM OAG.author WHERE name = #{name}")
-    List<Author> findByName(String name);
+    //    @Select("SELECT * FROM OAG.author WHERE name LIKE CONCAT('%', #{name}, '%')")
+    @Select("SELECT * FROM OAG.author WHERE name = #{name} LIMIT 1")
+    Author findByName(String name);
 
 }
