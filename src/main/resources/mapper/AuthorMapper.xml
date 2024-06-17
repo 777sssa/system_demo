@@ -8,8 +8,47 @@
         select * from OAG.author
     </select>
 
-    <!-- 根据书名查询书籍 -->
-    <select id="findByName" resultType="com.example.system_demo.entity.Author">
-        SELECT * FROM OAG.author WHERE name = #{name} LIMIT 1
+    <!-- 根据author_name查询author+author_profile表所有信息 -->
+<!--    <select id="findByName" resultType="com.example.system_demo.entity.Author">-->
+<!--        SELECT * FROM OAG.author WHERE name = #{name} LIMIT 1-->
+
+<!--    </select>-->
+
+    <select id="findAuthorProfileByName" parameterType="string" resultType="com.example.system_demo.vo.AuthorProfileVO">
+        SELECT
+            a.id AS authorId,
+            a.name AS authorName,
+            a.org AS authorOrg,
+            a.normalized_name AS normalizedName,
+            a.last_known_aff_id AS lastKnownAffId,
+            a.position,
+            a.n_pubs AS nPubs,
+            a.n_citation AS nCitation,
+            a.h_index AS hIndex,
+            a.tags,
+            a.pubs,
+            ap.email,
+            ap.phone,
+            ap.gender,
+            ap.picture,
+            ap.homepage,
+            ap.pos,
+            ap.biography,
+            ap.education,
+            ap.interests,
+            ap.org AS profileOrg
+        FROM
+            author a
+                LEFT JOIN
+            author_profile ap
+            ON
+                a.id = ap.id
+        WHERE
+            a.name = #{name}
+            LIMIT 1
     </select>
+
+
+
+
 </mapper>

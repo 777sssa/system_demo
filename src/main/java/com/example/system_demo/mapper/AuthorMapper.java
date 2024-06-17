@@ -1,7 +1,7 @@
 package com.example.system_demo.mapper;
 
 import com.example.system_demo.entity.Author;
-import com.example.system_demo.entity.AuthorTest;
+import com.example.system_demo.vo.AuthorProfileVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -14,7 +14,6 @@ public interface AuthorMapper {
     List<Author> findAll();
 
     //    @Select("SELECT * FROM OAG.author WHERE name LIKE CONCAT('%', #{name}, '%')")
-    @Select("SELECT * FROM OAG.author WHERE name = #{name} LIMIT 1")
-    Author findByName(String name);
+    AuthorProfileVO findAuthorProfileByName(String name);
 
 }

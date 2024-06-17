@@ -4,6 +4,11 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+#    timeBetweenEvictionRunsMillis: 60000
+#    validationQuery: SELECT 1 FROM DUAL
+#    testWhileIdle: true
+#    testOnBorrow: false
+#    testOnReturn: false
   jpa:
     show-sql: true
     properties:
@@ -35,3 +40,4 @@ mybatis-plus:
     mapper-package: com.example.arrow_smart_toilet_back_01.mapper
     data-permission:
       enabled: true
+

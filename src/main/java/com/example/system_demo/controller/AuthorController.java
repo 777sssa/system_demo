@@ -1,8 +1,9 @@
 package com.example.system_demo.controller;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.system_demo.entity.Author;
-import com.example.system_demo.entity.AuthorTest;
 import com.example.system_demo.entity.Paper;
 import com.example.system_demo.service.AuthorService;
+import com.example.system_demo.vo.AuthorProfileVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,16 +28,13 @@ public class AuthorController {
     }
 
     @GetMapping("/findByName")
-    public ResponseEntity<?> findByName(@RequestParam String name) {
-        Author author = authorService.findByName(name);
-        List<Paper> papers = authorService.getPapersByAuthorName(name);
+    public ResponseEntity<?> findByName(@RequestParam String name,@RequestParam int page, @RequestParam int size) {
+        AuthorProfileVO authorProfile = authorService.getAuthorProfileByName(name);
+        Page<Paper> papers = authorService.getPapersByAuthorName(name, page, size);
         Map<String, Object> response = new HashMap<>();
-        response.put("author", author);
-        response.put("papers", papers);
-//        for (Paper paper : papers) {
-//            List<Author> coAuthors = authorService.getAuthorsByPaperId(paper.getId());
-//            response.put("coAuthorsForPaper_" + paper.getId(), coAuthors);
-//        }
+        response.put("author", authorProfile);
+        response.put("papers", papers.getRecords());
+        response.put("total", papers.getTotal());
         return ResponseEntity.ok(response);
     }
 
