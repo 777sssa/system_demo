@@ -28,15 +28,22 @@ public class AuthorService {
         return authorMapper.findAuthorProfileByName(name);
     }
 
-    public Page<Paper> getPapersByAuthorName(String name, int page, int size) {
+//    public Page<Paper> getPapersByAuthorName(String name, int page, int size) {
+//        AuthorProfileVO authorProfile = authorMapper.findAuthorProfileByName(name);
+//        if (authorProfile != null && authorProfile.getAuthorId() != null) {
+//            Page<Paper> paperPage = new Page<>(page, size);
+//            List<Paper> papers = paperMapper.findByAuthorId(paperPage, authorProfile.getAuthorId());
+//            paperPage.setRecords(papers);
+//            return paperPage;
+//        }
+//        return new Page<>();
+//    }
+    public List<Paper> getPapersByAuthorName(String name) {
         AuthorProfileVO authorProfile = authorMapper.findAuthorProfileByName(name);
-        if (authorProfile != null && authorProfile.getAuthorId() != null) {
-            Page<Paper> paperPage = new Page<>(page, size);
-            List<Paper> papers = paperMapper.findByAuthorId(paperPage, authorProfile.getAuthorId());
-            paperPage.setRecords(papers);
-            return paperPage;
+        if (authorProfile != null ) {
+            return paperMapper.findByAuthorId(authorProfile.getAuthorId());
         }
-        return new Page<>();
+        return Collections.emptyList();
     }
 
 }

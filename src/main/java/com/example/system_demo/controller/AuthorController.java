@@ -28,13 +28,16 @@ public class AuthorController {
     }
 
     @GetMapping("/findByName")
-    public ResponseEntity<?> findByName(@RequestParam String name,@RequestParam int page, @RequestParam int size) {
+    public ResponseEntity<?> findByName(@RequestParam String name) {
+//        ,@RequestParam int page, @RequestParam int size
         AuthorProfileVO authorProfile = authorService.getAuthorProfileByName(name);
-        Page<Paper> papers = authorService.getPapersByAuthorName(name, page, size);
+//        Page<Paper> papers = authorService.getPapersByAuthorName(name, page, size);
+        List<Paper> papers = authorService.getPapersByAuthorName(name);
         Map<String, Object> response = new HashMap<>();
         response.put("author", authorProfile);
-        response.put("papers", papers.getRecords());
-        response.put("total", papers.getTotal());
+//        response.put("papers", papers.getRecords());
+//        response.put("total", papers.getTotal());
+        response.put("papers", papers);
         return ResponseEntity.ok(response);
     }
 

@@ -30,5 +30,6 @@ public interface PaperMapper {
             "UNION ALL",
             "SELECT * FROM paper_7 WHERE author_id = #{authorId}"
     })
-    List<Paper> findByAuthorId(Page<Paper> page, @Param("authorId") String authorId);
+//    List<Paper> findByAuthorId(Page<Paper> page, @Param("authorId") String authorId);
+    List<Paper> findByAuthorId(@Param("authorId") String authorId);
 }
